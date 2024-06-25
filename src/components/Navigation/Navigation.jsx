@@ -1,13 +1,23 @@
 import clsx from "clsx";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import s from "./Navigation.module.css";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { SearchBar } from "../SearchBar/SearchBar";
+import { Loader } from "../Loader/Loader";
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(s.link, isActive && s.active);
 };
 
 const Navigation = () => {
+  const [activeSearch, setActiveSearch] = useState(false);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    setActiveSearch(location.pathname === "/movies");
+  }, [location]);
+
   return (
     <>
       <header className={s.header}>
@@ -19,8 +29,15 @@ const Navigation = () => {
             Movies
           </NavLink>
         </nav>
+        {activeSearch && <SearchBar />}
       </header>
-      <Suspense>
+      <Suspense
+        fallback={
+          <div>
+            <Loader />
+          </div>
+        }
+      >
         <Outlet />
       </Suspense>
     </>
