@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { searchMovieCredits } from "../../filmAPI";
-import Loader from "../Loader/Loader";
+import { Loader } from "../Loader/Loader";
 
 const MovieCast = () => {
   const [actors, setActors] = useState([]);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { searchTrendingMovies } from "../../filmAPI";
 import MovieList from "../../components/MovieList/MovieList";
 import { useLocation } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import { Loader } from "../../components/Loader/Loader";
 
 const HomePage = () => {
   const [films, setFilms] = useState([]);

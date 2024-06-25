@@ -2,6 +2,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { useParams, Link, Outlet, useLocation } from "react-router-dom";
 import { searchMovieDetails } from "../../filmAPI";
 import { Loader } from "../../components/Loader/Loader";
+import { base_url } from "../../components/MovieList/MovieList";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -9,6 +10,7 @@ const MovieDetailsPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const location = useLocation();
+  const goBack = useRef(location.state || "/movies");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,24 +27,18 @@ const MovieDetailsPage = () => {
     fetchData();
   }, [movieId]);
 
-  const goBack = useRef(location.state || "/movies");
-
   return (
     <>
       {loading ? (
         <Loader />
       ) : (
-        <div>
+        <div className="p-5">
           <div>
-            <Link to={goBack.current}>Go back</Link>
+            <Link path={goBack.current}>Go back</Link>
             <div>
               <img
-                src={
-                  movie && movie.backdrop_path
-                    ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
-                    : "https://via.placeholder.com/500x281"
-                }
-                alt={movie.original_title}
+                src={`${base_url}w500/${movie.still_path}`}
+                alt={movie.title}
               />
             </div>
             <div>
