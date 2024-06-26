@@ -19,7 +19,7 @@ export const searchTrendingMovies = async () => {
   return data;
 };
 
-export const searchMovieDetails = async ({ id }) => {
+export const searchMovieDetails = async (id) => {
   const { data } = await axios.get(`/movie/${id}`, {
     params: {
       api_key: API_KEY,
