@@ -23,16 +23,24 @@ export const SearchBar = () => {
   const [movie, setMovie] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const value = searchParams.get("movie");
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (!e.target.elements.text.value.trim()) {
+      toast.error("Enter searched film");
+      return;
+    }
     setSearchParams({ query: movie });
   };
 
-  if (!value.text.trim()) {
-    toast.error("Enter searched film");
-    return;
-  }
+  //     const query = searchParams.get("query");
+  //     setSearchParams({ query: movie });
+  //   };
+
+  //   if (!value.text.trim()) {
+  //     toast.error("Enter searched film");
+  //     return;
+  //   }
   // const submitForm = (values, actions) => {
   //   if (!values.text.trim()) {
   //     toast.error("Enter searched film");
@@ -55,7 +63,7 @@ export const SearchBar = () => {
           className="input input-bordered input-info w-full max-w-xs"
         />
         <button type="submit" className="btn btn-primary">
-          Button
+          Search
         </button>
       </form>
       {/* <Formik

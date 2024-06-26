@@ -28,11 +28,11 @@ export const searchMovieDetails = async ({ id }) => {
   return data;
 };
 
-export const searchMovies = async ({ query, page }) => {
+export const searchMovies = async (query) => {
   const {
     data: { results },
   } = await axios.get(
-    `/search/movie?&include_adult=false&language=en-US&page=${page}`,
+    `/search/movie?&include_adult=false&language=en-US&page=1`,
     {
       params: {
         api_key: API_KEY,
