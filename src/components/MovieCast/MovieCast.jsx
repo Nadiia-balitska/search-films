@@ -12,7 +12,7 @@ const MovieCast = () => {
   useEffect(() => {
     if (!movieId) return;
 
-    const fetchCredits = async () => {
+    const fetchCast = async () => {
       try {
         setLoading(true);
         const actors = await searchMovieCredits(movieId);
@@ -23,7 +23,7 @@ const MovieCast = () => {
         setLoading(false);
       }
     };
-    fetchCredits();
+    fetchCast();
   }, [movieId]);
 
   return (

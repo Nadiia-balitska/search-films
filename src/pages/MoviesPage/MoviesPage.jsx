@@ -1,9 +1,10 @@
 import { searchMovies } from "../../filmAPI";
 import { useState, useEffect } from "react";
 import MovieList from "../../components/MovieList/MovieList";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 // import s from "./MoviesPage.module.css";
 import { Loader } from "../../components/Loader/Loader";
+import { SearchBar } from "../../components/SearchBar/SearchBar";
 
 const MoviesPage = () => {
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -11,7 +12,7 @@ const MoviesPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const query = searchParams.get("query");
+  const query = searchParams.get("query") ?? "";
 
   useEffect(() => {
     if (!query) return;
@@ -37,6 +38,8 @@ const MoviesPage = () => {
         <Loader />
       ) : (
         <div>
+          <Link to="/">Go Back</Link>
+          <SearchBar />
           <MovieList movies={filteredMovies} />
         </div>
       )}

@@ -1,17 +1,18 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+// import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useSearchParams } from "react-router-dom";
-import s from "./SearchBar.module.css";
-import * as Yup from "yup";
+// import s from "./SearchBar.module.css";
+// import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { useState } from "react";
 
-const initialValues = { text: "" };
+// const initialValues = { text: "" };
 
-const validationSchema = Yup.object().shape({
-  text: Yup.string()
-    .min(1, "To short text")
-    .max(15, "To long text")
-    .required("Enter films"),
-});
+// const validationSchema = Yup.object().shape({
+//   text: Yup.string()
+//     .min(1, "To short text")
+//     .max(15, "To long text")
+//     .required("Enter films"),
+// });
 
 //   const [searchValue, setSearchValue] = useState("");
 //   const [isLoading, setIsLoading] = useState(false);
@@ -19,29 +20,45 @@ const validationSchema = Yup.object().shape({
 //   const [page, setPage] = useState(1);
 
 export const SearchBar = () => {
+  const [movie, setMovie] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const value = searchParams.get("query");
-  const onSubmit = async (query) => {
-    if (query === value) return;
-    setSearchParams({ query });
-    // setError(null);
-    // setPage(1);
+  const value = searchParams.get("movie");
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setSearchParams({ query: movie });
   };
 
-  const submitForm = (values, actions) => {
-    if (!values.text.trim()) {
-      toast.error("Enter searched film");
-      return;
-    }
+  if (!value.text.trim()) {
+    toast.error("Enter searched film");
+    return;
+  }
+  // const submitForm = (values, actions) => {
+  //   if (!values.text.trim()) {
+  //     toast.error("Enter searched film");
+  //     return;
+  //   }
 
-    onSubmit(values.text);
-    actions.resetForm();
-  };
+  //     onSubmit(values.text);
+  //     actions.resetForm();
+  //   };
 
   return (
-    <header>
-      <Formik
+    <>
+      <form onSubmit={onSubmit}>
+        <input
+          onChange={(e) => {
+            setMovie(e.target.value);
+          }}
+          type="text"
+          placeholder="Search movie..."
+          className="input input-bordered input-info w-full max-w-xs"
+        />
+        <button type="submit" className="btn btn-primary">
+          Button
+        </button>
+      </form>
+      {/* <Formik
         initialValues={initialValues}
         onSubmit={submitForm}
         validationSchema={validationSchema}
@@ -59,7 +76,7 @@ export const SearchBar = () => {
             Search film
           </button>
         </Form>
-      </Formik>
-    </header>
+      </Formik> */}
+    </>
   );
 };

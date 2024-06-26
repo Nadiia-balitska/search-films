@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { searchTrendingMovies } from "../../filmAPI";
 import MovieList from "../../components/MovieList/MovieList";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
 
 const HomePage = () => {
   const [films, setFilms] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
+  //   const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,7 @@ const HomePage = () => {
       ) : (
         <div>
           <h1>You can see trending movies for today:</h1>
-          {films.length > 0 && <MovieList movies={films} location={location} />}
+          {films.length > 0 && <MovieList movies={films} />}
           {error && <p>{error}</p>}
         </div>
       )}
