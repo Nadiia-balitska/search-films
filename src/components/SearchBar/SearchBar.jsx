@@ -27,7 +27,6 @@ export const SearchBar = () => {
           name="text"
           type="text"
           placeholder="Search movie..."
-          className="input input-bordered input-info w-full max-w-xs"
         />
         <button type="submit" className="btn btn-primary">
           Search
