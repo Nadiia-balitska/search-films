@@ -3,6 +3,7 @@ import { searchTrendingMovies } from "../../filmAPI";
 import MovieList from "../../components/MovieList/MovieList";
 // import { useLocation } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
+import UserBar from "../../components/UserBar/UserBar";
 
 const HomePage = () => {
   const [films, setFilms] = useState([]);
@@ -31,6 +32,7 @@ const HomePage = () => {
         <Loader />
       ) : (
         <div>
+          <UserBar />
           <h1>You can see trending movies for today:</h1>
           {films.length > 0 && <MovieList movies={films} />}
           {error && <p>{error}</p>}
